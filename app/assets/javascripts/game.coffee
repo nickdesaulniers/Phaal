@@ -31,23 +31,25 @@ $(document).ready ->
   # Reset game when player catches a monster
   reset = ->
     # Throw the monster somewhere on the screen randomly
-    monster.x = 32 + (Math.random() * (canvas.width - 64))
-    monster.y = 32 + (Math.random() * (canvas.height - 64))
+    monster.x = 32 + Math.floor Math.random() * (canvas.width - 64)
+    monster.y = 32 + Math.floor Math.random() * (canvas.height - 64)
+    #console.log "Monster x: #{monster.x}, y: #{monster.y}"
 
   # Update game objects
   update = (modifier) ->
+    nextStep = hero.speed * modifier
     # Player holding up
-    if keysDown[38]
-      hero.y -= hero.speed * modifier
+    if keysDown[38] and hero.y - nextStep > 32
+      hero.y -= nextStep
     # Player holding down
-    if keysDown[40]
-      hero.y += hero.speed * modifier
+    if keysDown[40] and hero.y + nextStep < canvas.height - 64
+      hero.y += nextStep
     # Player holding left
-    if keysDown[37]
-      hero.x -= hero.speed * modifier
+    if keysDown[37] and hero.x - nextStep > 32
+      hero.x -= nextStep
     # Player holding right
-    if keysDown[39]
-      hero.x += hero.speed * modifier
+    if keysDown[39] and hero.x + nextStep < canvas.width - 64
+      hero.x += nextStep
 
     # Are they touching?
     if hero.x <= (monster.x + 32) and
