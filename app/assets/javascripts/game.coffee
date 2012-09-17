@@ -114,6 +114,8 @@ $(document).ready ->
     last = now
     requestAnimationFrame main
 
+  # Phat beats
+  document.getElementById('phat_beats').play()
   reset()
   main()
   
