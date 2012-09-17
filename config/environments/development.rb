@@ -38,7 +38,7 @@ Phaal::Application.configure do
   # ^ concatenates the assets in development
   
   # Used by websocket-rails
-  config.threadsafe!
+  #config.threadsafe!
   
   # Used by devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
