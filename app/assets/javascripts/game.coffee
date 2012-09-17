@@ -14,7 +14,7 @@ $(document).ready ->
 
   # Game objects
   world = new World()
-  hero = new Hero canvas.width / 2, canvas.height / 2, 256
+  hero = new Hero canvas.width / 2 - 16, canvas.height / 2 - 16, 256
   monster = new Monster 0, 0
   monstersCaught = 0
 
