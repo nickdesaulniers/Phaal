@@ -22,12 +22,13 @@ class Monster extends Model
 
 class World extends Model
   constructor: ->
-    super 'assets/world.png'
+    super 'assets/world.png', 0, 0
 
 #nick = new Model 'assets/rails.png'
 #window.Model = Model
 new Hero()
 
+window.Model = Model
 window.Hero = Hero
 window.Monster = Monster
 window.World = World

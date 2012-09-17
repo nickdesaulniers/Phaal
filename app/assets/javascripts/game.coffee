@@ -8,7 +8,6 @@ $(document).ready ->
 
   # Create the canvas
   canvas = document.getElementById 'map'
-  ctx = canvas.getContext '2d'
 
   # Set the first previous time measurement
   last = Date.now()
@@ -18,6 +17,9 @@ $(document).ready ->
   hero = new Hero canvas.width / 2, canvas.height / 2, 256
   monster = new Monster 0, 0
   monstersCaught = 0
+
+  # Create the View
+  view = new View canvas, world, hero, monster
 
   # Handle keyboard controls
   keysDown = {}
@@ -55,29 +57,13 @@ $(document).ready ->
       ++monstersCaught
       reset()
 
-  # Draw everything
-  render = ->
-    if world.isReady()
-      ctx.drawImage world.getImage(), 0, 0
-    if hero.isReady()
-      ctx.drawImage hero.getImage(), hero.x, hero.y
-    if monster.isReady()
-      ctx.drawImage monster.getImage(), monster.x, monster.y
-
-    # Score
-    ctx.fillStyle = 'rgb(250, 250, 250)'
-    ctx.font = '24px Helvetica'
-    ctx.textAlign = 'left'
-    ctx.textBaseline = 'top'
-    ctx.fillText 'Goblins caught: ' + monstersCaught, 32, 32
-
   # The main game loop
   main = ->
     now = Date.now()
     delta = now - last
 
     update delta / 1000
-    render()
+    view.render monstersCaught
 
     last = now
     requestAnimationFrame main
