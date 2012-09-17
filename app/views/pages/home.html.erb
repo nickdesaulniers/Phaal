@@ -1,9 +1,9 @@
-<div id="content" class="center">
-  <h1>
-    Welcome to Phaal Online!
-  </h1>
+<% if user_signed_in? %>
+  <canvas id="map" width="512" height="480" >
+    Looks like your browser doesn't support canvas.
+  </canvas>
+<% else %>
   <p>
-    Under Construction
+    Sign In or Sign Up to play!
   </p>
-</div>
-<%= link_to 'Sign in', new_user_session_path %>
+<% end %>
