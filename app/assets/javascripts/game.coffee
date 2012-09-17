@@ -20,13 +20,9 @@ $(document).ready ->
 
   # Create the View
   view = new View canvas, world, hero, monster
-
-  # Handle keyboard controls
-  keysDown = {}
-  addEventListener 'keydown', (e) ->
-    keysDown[e.keyCode] = true
-  addEventListener 'keyup', (e) ->
-    delete keysDown[e.keyCode]
+  
+  # Create the Input handler to handle keyboard controls
+  input = new Input()
 
   # Reset game when player catches a monster
   reset = ->
@@ -39,16 +35,16 @@ $(document).ready ->
   update = (modifier) ->
     nextStep = hero.speed * modifier
     # Player holding up
-    if keysDown[38] and hero.y - nextStep > 32
+    if input.isPressed(keyCodes.up) and hero.y - nextStep > 32
       hero.y -= nextStep
     # Player holding down
-    if keysDown[40] and hero.y + nextStep < canvas.height - 64
+    if input.isPressed(keyCodes.down) and hero.y + nextStep < canvas.height - 64
       hero.y += nextStep
     # Player holding left
-    if keysDown[37] and hero.x - nextStep > 32
+    if input.isPressed(keyCodes.left) and hero.x - nextStep > 32
       hero.x -= nextStep
     # Player holding right
-    if keysDown[39] and hero.x + nextStep < canvas.width - 64
+    if input.isPressed(keyCodes.right) and hero.x + nextStep < canvas.width - 64
       hero.x += nextStep
 
     # Are they touching?
