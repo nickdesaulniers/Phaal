@@ -13,38 +13,10 @@ $(document).ready ->
   # Set the first previous time measurement
   last = Date.now()
 
-  # Include images
-  # Background image
-  bgReady = false
-  bgImage = new Image()
-  bgImage.onload = ->
-    bgReady = true
-  bgImage.src = 'assets/map.png'
-
-  # Hero image
-  heroReady = false
-  heroImage = new Image()
-  heroImage.onload = ->
-    heroReady = true
-  heroImage.src = 'assets/hero.png'
-
-  # Monster image
-  monsterReady = false
-  monsterImage = new Image()
-  monsterImage.onload = ->
-    monsterReady = true
-  monsterImage.src = 'assets/monster.png'
-
   # Game objects
-  hero = {
-    x:     canvas.width / 2,
-    y:     canvas.height / 2,
-    speed: 256 # movement in pixels per second
-  }
-  monster = {
-    x: 0,
-    y: 0
-  }
+  world = new World()
+  hero = new Hero canvas.width / 2, canvas.height / 2, 256
+  monster = new Monster 0, 0
   monstersCaught = 0
 
   # Handle keyboard controls
@@ -56,9 +28,6 @@ $(document).ready ->
 
   # Reset game when player catches a monster
   reset = ->
-    #hero.x = canvas.width / 2
-    #hero.y = canvas.height / 2
-
     # Throw the monster somewhere on the screen randomly
     monster.x = 32 + (Math.random() * (canvas.width - 64))
     monster.y = 32 + (Math.random() * (canvas.height - 64))
@@ -88,12 +57,12 @@ $(document).ready ->
 
   # Draw everything
   render = ->
-    if bgReady
-      ctx.drawImage bgImage, 0, 0
-    if heroReady
-      ctx.drawImage heroImage, hero.x, hero.y
-    if monsterReady
-      ctx.drawImage monsterImage, monster.x, monster.y
+    if world.isReady()
+      ctx.drawImage world.getImage(), 0, 0
+    if hero.isReady()
+      ctx.drawImage hero.getImage(), hero.x, hero.y
+    if monster.isReady()
+      ctx.drawImage monster.getImage(), monster.x, monster.y
 
     # Score
     ctx.fillStyle = 'rgb(250, 250, 250)'
@@ -106,8 +75,7 @@ $(document).ready ->
   main = ->
     now = Date.now()
     delta = now - last
-    #alert "now #{now}, last #{last}"
-    #alert "calling update with update of #{delta/1000}"
+
     update delta / 1000
     render()
 
@@ -115,7 +83,6 @@ $(document).ready ->
     requestAnimationFrame main
 
   # Phat beats
-  document.getElementById('phat_beats').play()
+  #document.getElementById('phat_beats').play()
   reset()
   main()
-  

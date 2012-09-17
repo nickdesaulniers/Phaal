@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require model
+//= require game
 //= require_tree .
 //= require websocket_rails/main
 
