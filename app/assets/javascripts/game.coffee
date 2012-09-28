@@ -8,6 +8,7 @@ $(document).ready ->
 
   # Create the canvas
   canvas = document.getElementById 'map'
+  return unless canvas
 
   # Set the first previous time measurement
   last = Date.now()
