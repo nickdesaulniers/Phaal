@@ -24,11 +24,24 @@ canvas {
   text-align: center;
 }
 
+.left {
+  float: left;
+}
+
+.clear {
+  clear: both;
+}
+
 #content {
   width: 80%;
   margin: 0 auto;
 }
 
 #phat_beats {
+  clear: both;
   margin-top: 20px;
+}
+
+#chat_bar {
+  width: 512px;
 }
