@@ -1,12 +1,14 @@
 <% if user_signed_in? %>
-  <canvas id="map" width="512px" height="480px" class="left">
-    Looks like your browser doesn&#39;t support canvas.
-  </canvas>
-  <input id="chat_box" type="textfield" disabled="disabled" />
-  <input id="chat_bar" type="text" />
-  <div class="clear">
-    <audio id="phat_beats" controls loop src="assets/shinichi_osawa_electro_411_lies_in_disguise_remix.ogg">
-      Looks like your browser doesn&#39;t support audio.
-    </audio>
+  <div id="box_container">
+    <canvas id="map" width="512px" height="480px" class="left">
+      Looks like your browser doesn&#39;t support canvas.
+    </canvas>
+    <div id="chat_box" class="right"></div>
+    <input id="chat_bar" type="text" class="right" placeholder="Hit Enter to chat"/>
+    <div class="clear">
+      <audio id="phat_beats" controls loop src="assets/shinichi_osawa_electro_411_lies_in_disguise_remix.ogg">
+        Looks like your browser doesn&#39;t support audio.
+      </audio>
+    </div>
   </div>
 <% end %>

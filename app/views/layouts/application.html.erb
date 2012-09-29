@@ -13,7 +13,8 @@
     </h1>
     <p>
       <% if user_signed_in? %>
-        Signed in as <%= current_user.email %>. Not you?
+        Signed in as <span id="username"><%= current_user.email %></span>.
+        Not you?
 			  <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to 'Sign in', new_user_session_path %>

@@ -17,7 +17,7 @@ a:visited {
 }
 
 canvas {
-  border: solid 2px orange;
+  border: solid 1px orange;
 }
 
 .center {
@@ -26,6 +26,10 @@ canvas {
 
 .left {
   float: left;
+}
+
+.right {
+  float: right;
 }
 
 .clear {
@@ -43,11 +47,18 @@ canvas {
 }
 
 #chat_box {
-  height: 450px;
+  border: 1px solid orange;
+  width: 500px;
+  height: 455px;
   background: gray;
+  margin-bottom: 3px;
 }
 
-#chat_box,
 #chat_bar {
-  width: 512px;
+  width: 496px;
+}
+
+#box_container {
+  width: 1024px;
+  margin: 0 auto;
 }

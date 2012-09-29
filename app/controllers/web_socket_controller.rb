@@ -24,4 +24,14 @@ class WebSocketController < WebsocketRails::BaseController
     puts "Received message #{message} of type #{message.class} from user " +
       current_user.email
   end
+  def client_chat
+    puts "Received message #{message} of type #{message.class} from user " +
+      current_user.email
+    if message.class == String
+      broadcast_message :chatter, {
+        message: message,
+        user: current_user.email.sub(/@.+/, '')
+      }
+    end
+  end
 end
