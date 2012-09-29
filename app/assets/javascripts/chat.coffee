@@ -1,3 +1,5 @@
+username = null
+
 class ChatEvent
   constructor: (msg) ->
     evt = document.createEvent 'Event'
@@ -8,25 +10,16 @@ class ChatEvent
 
 class Chat
   constructor: (msg, user) ->
-    # <p><span class="current_user">user</span>msg</p>
+    # <p><span class="user">user</span>msg</p>
     @p = document.createElement 'p'
     span = document.createElement 'span'
+    span.setAttribute 'class',
+    if user is username then 'current_user' else 'other_user'
     span.appendChild document.createTextNode user
     @p.appendChild span
-    @p.appendChild document.createTextNode ': ' + msg
+    @p.appendChild document.createTextNode ': ' + msg 
   toElem: ->
     @p
-
-class ChatQueue
-  constructor: (@maxLength, @targetElem) ->
-    @queue = []
-  push: (chat) ->
-    return unless chat instanceof Chat
-    @queue.push chat
-    @queue.shift() if @queue.length > @maxLength
-    @targetElem.innerHTML = ''
-    for chat in @queue
-      @targetElem.appendChild chat.toElem()
 
 $(document).ready ->
   chat_box = document.getElementById 'chat_box'
@@ -36,13 +29,13 @@ $(document).ready ->
 
   location = (window.location + 'websocket').replace /^http/, 'ws'
   dispatcher = new WebSocketRails location
-  queue = new ChatQueue 10, chat_box
 
   # send a chat to the server on Enter keypress
   chat_bar.addEventListener 'keyup', (e) ->
     # if user presses enter
     if e.keyCode is 13
-      dispatcher.trigger 'client_chat', chat_bar.value
+      dispatcher.trigger 'client_chat',
+      chat_bar.value unless chat_bar.value.length is 0
       chat_bar.value = ''
 
   # On receiving a chat trigger a chat event
@@ -51,4 +44,5 @@ $(document).ready ->
 
   # Listen for chat events
   document.addEventListener 'chatEvent', (e) ->
-    queue.push new Chat e.message, e.user
+    chat = new Chat e.message, e.user
+    chat_box.insertBefore chat.toElem(), chat_box.firstChild

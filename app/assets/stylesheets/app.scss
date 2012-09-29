@@ -36,6 +36,14 @@ canvas {
   clear: both;
 }
 
+span.current_user {
+  color: lime;
+}
+
+span.other_user {
+  color: cyan;
+}
+
 #content {
   width: 80%;
   margin: 0 auto;
@@ -52,6 +60,13 @@ canvas {
   height: 455px;
   background: gray;
   margin-bottom: 3px;
+  text-align: left;
+  overflow: auto;
+}
+
+#chat_box p {
+  margin: 0 10px;
+  word-wrap: break-word;
 }
 
 #chat_bar {
