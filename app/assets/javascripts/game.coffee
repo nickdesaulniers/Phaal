@@ -24,25 +24,38 @@ $(document).ready ->
   ]
   board = new Board tileMap, context, ->
     # Dummy test code
-    radius = 75
-    ball = new Sprite 'ball', {
-      paint: (sprite, context) ->
-        context.beginPath()
-        context.arc sprite.left + sprite.width / 2,
-        sprite.top + sprite.height / 2,
-        radius, 0, Math.PI * 2, false
-        context.clip()
-        context.shadowColor = 'rgb(0,0,0)'
-        context.shadowOffsetX = -4
-        context.shadowOffsetY = -4
-        context.shadowBlur = 8
-        context.lineWidth = 2
-        context.strokeStyle = 'rgb(100, 100, 195)'
-        context.fillStyle = 'rgba(30, 144, 255, 0.15)'
-        context.fill()
-        context.stroke()
-    }
-    ball.left = 320
-    ball.top = 160
-    ball.paint context
-  
+    window.spritesheet = new Image()
+    runnerCells = [
+      { left: 0,   top: 0, width: 47, height: 64 },
+      { left: 55,  top: 0, width: 44, height: 64 },
+      { left: 107, top: 0, width: 39, height: 64 },
+      { left: 150, top: 0, width: 46, height: 64 },
+      { left: 208, top: 0, width: 49, height: 64 },
+      { left: 265, top: 0, width: 46, height: 64 },
+      { left: 320, top: 0, width: 42, height: 64 },
+      { left: 380, top: 0, width: 35, height: 64 },
+      { left: 425, top: 0, width: 35, height: 64 },
+    ]
+    sprite = new Sprite 'runner', new SpriteSheetPainter runnerCells
+    lastAdvance = 0
+    pageFlipInterval = 100
+    
+    animate = (time) ->
+      context.clearRect 0, 0, canvas.width, canvas.height
+      board.draw context
+      sprite.paint context
+      if time - lastAdvance > pageFlipInterval
+        sprite.painter.advance()
+        lastAdvance = time
+      requestAnimationFrame animate
+    
+    #init
+    sprite.left = 200
+    sprite.top = 100
+    spritesheet.src = 'assets/running-sprite-sheet.png'
+    spritesheet.onload = ->
+      lastAdvance = Date.now()
+      requestAnimationFrame animate
+      
+      
+      
