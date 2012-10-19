@@ -26,19 +26,15 @@ $(document).ready ->
     # Dummy test code
     window.spritesheet = new Image()
     runnerCells = [
-      { left: 0,   top: 0, width: 47, height: 64 },
-      { left: 55,  top: 0, width: 44, height: 64 },
-      { left: 107, top: 0, width: 39, height: 64 },
-      { left: 150, top: 0, width: 46, height: 64 },
-      { left: 208, top: 0, width: 49, height: 64 },
-      { left: 265, top: 0, width: 46, height: 64 },
-      { left: 320, top: 0, width: 42, height: 64 },
-      { left: 380, top: 0, width: 35, height: 64 },
-      { left: 425, top: 0, width: 35, height: 64 },
+      { left: 184, top: 0, width: 25, height: 50 },
+      { left: 210, top: 0, width: 25, height: 50 },
+      { left: 237, top: 0, width: 25, height: 50 },
+      { left: 263, top: 0, width: 25, height: 50 },
+      { left: 289, top: 0, width: 25, height: 50 },
     ]
     sprite = new Sprite 'runner', new SpriteSheetPainter runnerCells
     lastAdvance = 0
-    pageFlipInterval = 100
+    pageFlipInterval = 1000 / runnerCells.length
     
     animate = (time) ->
       context.clearRect 0, 0, canvas.width, canvas.height
@@ -52,7 +48,7 @@ $(document).ready ->
     #init
     sprite.left = 200
     sprite.top = 100
-    spritesheet.src = 'assets/running-sprite-sheet.png'
+    spritesheet.src = 'assets/lock.png'
     spritesheet.onload = ->
       lastAdvance = Date.now()
       requestAnimationFrame animate
