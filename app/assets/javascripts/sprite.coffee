@@ -2,16 +2,15 @@ class Sprite
   constructor: (@name, @painter, @behaviors = []) ->
     @top = 0
     @left = 0
-    @width = 10
-    @height = 10
+    @width = 25
+    @height = 50
     @velocityX = 0
-    @velocityY = 0
+    @velocityY = 50 # pixels / second
     @visible = true
     @animating = false
   paint: (context) ->
     @painter.paint @, context if @painter?
   update: (context, time) ->
-    #console.log @behaviors
     for i in [0...@behaviors.length]
       @behaviors[i].execute @, context, time
 
