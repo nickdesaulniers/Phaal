@@ -32,17 +32,22 @@ $(document).ready ->
       { left: 263, top: 0, width: 25, height: 50 },
       { left: 289, top: 0, width: 25, height: 50 },
     ]
-    sprite = new Sprite 'runner', new SpriteSheetPainter runnerCells
-    lastAdvance = 0
-    pageFlipInterval = 1000 / runnerCells.length
+    runInPlace =
+      lastAdvance: 0,
+      pageFlipInterval: 1000 / runnerCells.length,
+      execute: (sprite, context, now) ->
+        if now - @lastAdvance > @pageFlipInterval
+          sprite.painter.advance()
+          @lastAdvance = now
+    sprite = new Sprite 'runner',
+    new SpriteSheetPainter(runnerCells),
+    [runInPlace]
     
     animate = (time) ->
       context.clearRect 0, 0, canvas.width, canvas.height
       board.draw context
+      sprite.update context, time
       sprite.paint context
-      if time - lastAdvance > pageFlipInterval
-        sprite.painter.advance()
-        lastAdvance = time
       requestAnimationFrame animate
     
     #init

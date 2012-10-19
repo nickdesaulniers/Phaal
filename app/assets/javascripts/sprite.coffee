@@ -11,7 +11,8 @@ class Sprite
   paint: (context) ->
     @painter.paint @, context if @painter?
   update: (context, time) ->
-    for i in [0..@behaviors.length]
+    #console.log @behaviors
+    for i in [0...@behaviors.length]
       @behaviors[i].execute @, context, time
 
 class SpriteSheetPainter
