@@ -9,3 +9,25 @@ $(document).ready ->
   # Create the canvas
   canvas = document.getElementById 'map'
   return unless canvas
+  context = canvas.getContext '2d'
+
+  tileMap = [
+    [1, 1, 2, 2, 0, 0, 0, 0, 2],
+    [1, 2, 2, 0, 0, 0, 0, 0, 0],
+    [1, 2, 0, 0, 0, 0, 0, 0, 0],
+    [2, 2, 0, 0, 2, 2, 2, 2, 0],
+    [0, 0, 0, 0, 2, 1, 1, 2, 0],
+    [0, 0, 0, 0, 2, 1, 1, 2, 0],
+    [0, 0, 0, 0, 2, 2, 2, 2, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [2, 2, 0, 0, 0, 0, 0, 0, 0]
+  ]
+  board = new Board tileMap
+  interval = setInterval (e) ->
+    loadingPercentComplete = board.imageLoader.loadImages()
+    if loadingPercentComplete is 100
+      clearInterval interval
+      console.log 'Done!'
+      board.draw context
+    console.log "loaded #{loadingPercentComplete}%"
+  , 16
