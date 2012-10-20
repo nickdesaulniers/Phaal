@@ -61,7 +61,7 @@ $(document).ready ->
       requestAnimationFrame animate
     
     #init
-    sprite.left = 200
+    sprite.left = canvas.width / 2 - sprite.width / 2
     sprite.top = 100
     spritesheet.src = 'assets/lock.png'
     spritesheet.onload = ->
