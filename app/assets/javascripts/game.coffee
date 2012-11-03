@@ -25,33 +25,20 @@ $(document).ready ->
   board = new Board tileMap, context
   # Dummy test code
   runnerCells = [
-    { left: 184, top: 0, width: 25, height: 50 },
-    { left: 210, top: 0, width: 25, height: 50 },
-    { left: 237, top: 0, width: 25, height: 50 },
-    { left: 263, top: 0, width: 25, height: 50 },
-    { left: 289, top: 0, width: 25, height: 50 },
+    new Cell(184, 0, 25, 50)
+    new Cell(210, 0, 25, 50)
+    new Cell(237, 0, 25, 50)
+    new Cell(263, 0, 25, 50)
+    new Cell(289, 0, 25, 50)
   ]
-  runDown =
-    lastAdvance: 0,
-    pageFlipInterval: 1000 / runnerCells.length,
-    execute: (sprite, context, now) ->
-      if now - @lastAdvance > @pageFlipInterval
-        sprite.painter.advance()
-        @lastAdvance = now
-  moveDown =
-    lastMove: 0,
-    execute: (sprite, context, time) ->
-      if @lastMove isnt 0
-        sprite.top += sprite.velocityY * ((time - @lastMove) / 1000)
-        if sprite.top + sprite.height > context.canvas.height
-          sprite.top = 0
-      @lastMove = time
+  runDown = new AnimationBehavior(runnerCells, 1000 / runnerCells.length)
+  moveDown = new MovementBehavior()
+
   sprite = new Sprite 'runner',
   new SpriteSheetPainter(runnerCells),
   [runDown, moveDown]
   
   animate = (time) ->
-    context.clearRect 0, 0, canvas.width, canvas.height
     board.draw context
     sprite.update context, time
     sprite.paint context
@@ -64,6 +51,3 @@ $(document).ready ->
   sprite.sheet.onload = ->
     lastAdvance = Date.now()
     requestAnimationFrame animate
-      
-      
-      
