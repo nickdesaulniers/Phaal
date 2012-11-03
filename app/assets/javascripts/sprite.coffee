@@ -8,6 +8,7 @@ class Sprite
     @velocityY = 50 # pixels / second
     @visible = true
     @animating = false
+    @sheet = new Image()
   paint: (context) ->
     @painter.paint @, context if @painter?
   update: (context, time) ->
@@ -24,8 +25,8 @@ class SpriteSheetPainter
       @cellIndex++
   paint: (sprite, context) ->
     cell = @cells[@cellIndex]
-    context.drawImage spritesheet, cell.left, cell.top, cell.width, cell.height,
-    sprite.left, sprite.top, cell.width, cell.height
+    context.drawImage sprite.sheet, cell.left, cell.top, cell.width,
+    cell.height, sprite.left, sprite.top, cell.width, cell.height
 
 class SpriteAnimator
   constructor: (@painters = [], @elapsedCB) ->

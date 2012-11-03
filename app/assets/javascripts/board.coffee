@@ -18,7 +18,7 @@ class Board
   # offscreen, then copy that canvas when the background is redrawn.  By keeping
   # an extra canvas in memory, the redraws of the background will be much
   # faster.
-  constructor: (@state, onScreenContext, cb) ->
+  constructor: (@state, onScreenContext) ->
     offScreenCanvas = document.createElement 'canvas'
     offScreenCanvas.width = onScreenContext.canvas.width
     offScreenCanvas.height = onScreenContext.canvas.height
@@ -34,7 +34,6 @@ class Board
       loadingPercentComplete = @imageLoader.loadImages()
       if loadingPercentComplete is 100
         clearInterval interval
-        console.log 'Done!'
         x = y = 0
         for row in @state
           x = 0
@@ -44,8 +43,6 @@ class Board
             x += 50
           y += 50
         @draw onScreenContext
-        cb?()
-      console.log "loaded #{loadingPercentComplete}%"
     , 16
   draw: (context) ->
     context.clearRect 0, 0, context.canvas.width, context.canvas.height
