@@ -1,6 +1,7 @@
 class Player
   constructor: (@id, left, top) ->
-    initialBehavior = downBehavior
+    #initialBehavior = downBehavior
+    initialBehavior = stillBehavior
     initialCells = initialBehavior[0].cells
     
     @sprite = new Sprite 'Player',

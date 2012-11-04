@@ -21,14 +21,27 @@ class MovementBehavior
     @lastAdvance = time
 
 # Behaviors
+
+# Still
+stillCells = [
+  new Cell(0,   0, 25, 50)
+  new Cell(27,  0, 25, 50)
+  new Cell(55,  0, 25, 50)
+  new Cell(84,  0, 25, 50)
+  new Cell(111, 0, 25, 50)
+  new Cell(139, 0, 25, 50)]
+animateStill = new AnimationBehavior stillCells, 1000 / stillCells.length
+
 # Down
 downCells = [
   new Cell(184, 0, 25, 50)
   new Cell(210, 0, 25, 50)
   new Cell(237, 0, 25, 50)
   new Cell(263, 0, 25, 50)
-  new Cell(289, 0, 25, 50)]
+  new Cell(289, 0, 25, 50)
+  new Cell(316, 0, 25, 50)]
 animateDown = new AnimationBehavior downCells, 1000 / downCells.length
 moveDown = new MovementBehavior()
 
+window.stillBehavior = [animateStill]
 window.downBehavior = [animateDown, moveDown]
