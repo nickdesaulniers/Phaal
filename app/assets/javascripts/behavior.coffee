@@ -33,6 +33,31 @@ stillDownCells = [
 animateStillDown = new AnimationBehavior stillDownCells,
 1000 / stillDownCells.length
 
+# Still - Up
+stillUpCells = [
+  new Cell 1,   192, 25, 50
+  new Cell 29,  192, 25, 50
+  new Cell 56,  192, 25, 50
+  new Cell 83,  192, 25, 50
+  new Cell 111, 192, 25, 50
+  new Cell 138, 192, 25, 50]
+animateStillUp = new AnimationBehavior stillUpCells,
+1000 / stillUpCells.length
+
+# Still - Left
+stillLeftCells = [
+  new Cell 0,   98, 25, 50
+  new Cell 26,  98, 25, 50
+  new Cell 53,  98, 25, 50
+  new Cell 79,  98, 25, 50
+  new Cell 105, 98, 25, 50
+  new Cell 132, 98, 25, 50]
+animateStillLeft = new AnimateBehavior stillLeftCells,
+1000 / stillLeftCells.length
+
+# Still - Right
+# need to add mirroring logic!!!
+
 # Move - Down
 moveDownCells = [
   new Cell 184, 0, 25, 50
@@ -44,8 +69,34 @@ moveDownCells = [
 animateMoveDown = new AnimationBehavior moveDownCells,
 1000 / moveDownCells.length
 
+# Move - Up
+moveUpCells = [
+  new Cell 184, 192, 25, 50
+  new Cell 210, 192, 25, 50
+  new Cell 237, 192, 25, 50
+  new Cell 262, 192, 25, 50
+  new Cell 287, 192, 25, 50
+  new Cell 314, 192, 25, 50]
+animateMoveUp = new AnimationBehavior moveUpCells,
+1000 / moveUpCells.length
+
+# Move - Left
+moveLeftCells = [
+  new Cell 186, 96, 25, 50
+  new Cell 211, 96, 25, 50
+  new Cell 235, 96, 25, 50
+  new Cell 259, 96, 25, 50
+  new Cell 284, 96, 25, 50
+  new Cell 308, 96, 25, 50]
+animateMoveDown = new Animation moveLeftCells,
+1000 / moveUpCells.length
+
+# Move - Right
+# need to add mirroring logic!!!
+
 # All move behaviors share the same movement behavior
 move = new MovementBehavior()
 
+# Need to attach the new behaviors
 window.stillDownBehavior = [animateStillDown]
 window.moveDownBehavior = [animateMoveDown, move]
