@@ -17,5 +17,12 @@ class Player
     @sprite.update context, time
   paint: (context) ->
     @sprite.paint context
+  reset: ->
+    @sprite.behaviors = stillBehavior
+    @sprite.painter.cells = stillBehavior[0].cells
+  do: (behaviors) ->
+    if behaviors.length
+      @sprite.behaviors = behaviors
+      @sprite.painter.cells = behaviors[0].cells
 
 window.Player = Player
