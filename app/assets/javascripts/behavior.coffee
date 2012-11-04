@@ -52,7 +52,7 @@ stillLeftCells = [
   new Cell 79,  98, 25, 50
   new Cell 105, 98, 25, 50
   new Cell 132, 98, 25, 50]
-animateStillLeft = new AnimateBehavior stillLeftCells,
+animateStillLeft = new AnimationBehavior stillLeftCells,
 1000 / stillLeftCells.length
 
 # Still - Right
@@ -88,7 +88,7 @@ moveLeftCells = [
   new Cell 259, 96, 25, 50
   new Cell 284, 96, 25, 50
   new Cell 308, 96, 25, 50]
-animateMoveDown = new Animation moveLeftCells,
+animateLeftDown = new AnimationBehavior moveLeftCells,
 1000 / moveUpCells.length
 
 # Move - Right
