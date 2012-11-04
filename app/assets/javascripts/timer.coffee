@@ -16,7 +16,7 @@ class StopWatch
 
 class AnimationTimer
   constructor: (@duration) ->
-  stopWatch: new Stopwatch()
+  stopWatch: new StopWatch()
   start: ->
     @stopWatch.start()
   stop: ->
