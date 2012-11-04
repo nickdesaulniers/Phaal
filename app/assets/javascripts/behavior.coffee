@@ -20,6 +20,15 @@ class MovementBehavior
         sprite.top = 0
     @lastAdvance = time
 
-window.Cell = Cell
-window.AnimationBehavior = AnimationBehavior
-window.MovementBehavior = MovementBehavior
+# Behaviors
+# Down
+downCells = [
+  new Cell(184, 0, 25, 50)
+  new Cell(210, 0, 25, 50)
+  new Cell(237, 0, 25, 50)
+  new Cell(263, 0, 25, 50)
+  new Cell(289, 0, 25, 50)]
+animateDown = new AnimationBehavior downCells, 1000 / downCells.length
+moveDown = new MovementBehavior()
+
+window.downBehavior = [animateDown, moveDown]

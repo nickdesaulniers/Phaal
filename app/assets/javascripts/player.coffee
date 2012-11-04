@@ -1,20 +1,11 @@
-# Down
-downCells = [
-  new Cell(184, 0, 25, 50)
-  new Cell(210, 0, 25, 50)
-  new Cell(237, 0, 25, 50)
-  new Cell(263, 0, 25, 50)
-  new Cell(289, 0, 25, 50)]
-animateDown = new AnimationBehavior downCells, 1000 / downCells.length
-moveDown = new MovementBehavior()
-
 class Player
   constructor: (@id, left, top) ->
-    proto = @constructor.prototype
+    initialBehavior = downBehavior
+    initialCells = initialBehavior[0].cells
     
     @sprite = new Sprite 'Player',
-    new SpriteSheetPainter(downCells),
-    [animateDown, moveDown]
+    new SpriteSheetPainter(initialCells),
+    initialBehavior
     
     @sprite.left = left
     @sprite.top = top
