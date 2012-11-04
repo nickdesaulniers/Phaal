@@ -20,28 +20,32 @@ class MovementBehavior
         sprite.top = 0
     @lastAdvance = time
 
-# Behaviors
+# Behaviors (still or moving, direction)
 
-# Still
-stillCells = [
+# Still - Down
+stillDownCells = [
   new Cell 0,   0, 25, 50
   new Cell 27,  0, 25, 50
   new Cell 55,  0, 25, 50
   new Cell 84,  0, 25, 50
   new Cell 111, 0, 25, 50
   new Cell 139, 0, 25, 50]
-animateStill = new AnimationBehavior stillCells, 1000 / stillCells.length
+animateStillDown = new AnimationBehavior stillDownCells,
+1000 / stillDownCells.length
 
-# Down
-downCells = [
+# Move - Down
+moveDownCells = [
   new Cell 184, 0, 25, 50
   new Cell 210, 0, 25, 50
   new Cell 237, 0, 25, 50
   new Cell 263, 0, 25, 50
   new Cell 289, 0, 25, 50
   new Cell 316, 0, 25, 50]
-animateDown = new AnimationBehavior downCells, 1000 / downCells.length
-moveDown = new MovementBehavior()
+animateMoveDown = new AnimationBehavior moveDownCells,
+1000 / moveDownCells.length
 
-window.stillBehavior = [animateStill]
-window.downBehavior = [animateDown, moveDown]
+# All move behaviors share the same movement behavior
+move = new MovementBehavior()
+
+window.stillDownBehavior = [animateStillDown]
+window.moveDownBehavior = [animateMoveDown, move]

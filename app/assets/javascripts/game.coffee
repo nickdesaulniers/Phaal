@@ -36,7 +36,7 @@ $(document).ready ->
     requestAnimationFrame animate
 
   setTimeout ->
-    player.do downBehavior
+    player.do moveDownBehavior
     setTimeout ->
       player.reset()
     , 2000

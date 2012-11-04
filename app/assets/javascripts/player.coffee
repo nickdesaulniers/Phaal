@@ -1,7 +1,7 @@
 class Player
   constructor: (@id, left, top) ->
-    #initialBehavior = downBehavior
-    initialBehavior = stillBehavior
+    #initialBehavior = moveDownBehavior
+    initialBehavior = stillDownBehavior
     initialCells = initialBehavior[0].cells
     
     @sprite = new Sprite 'Player',
@@ -18,7 +18,7 @@ class Player
   paint: (context) ->
     @sprite.paint context
   reset: ->
-    @sprite.behave stillBehavior
+    @sprite.behave stillDownBehavior
   do: (behaviors) ->
     @sprite.behave behaviors
 
