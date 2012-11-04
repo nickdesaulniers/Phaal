@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require image_loader
+//= require timer
 //= require cell
 //= require sprite
 //= require game

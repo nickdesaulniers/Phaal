@@ -56,4 +56,4 @@ class SpriteAnimator
   
 window.Sprite = Sprite
 window.SpriteSheetPainter = SpriteSheetPainter
-#window.SpriteAnimator = SpriteAnimator
+window.SpriteAnimator = SpriteAnimator
