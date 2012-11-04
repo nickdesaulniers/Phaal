@@ -1,6 +1,6 @@
 # Animation cells for the sprites
 class Cell
-  constructor: (@left, @top, @width, @height) ->
+  constructor: (@left, @top) ->
 
 class AnimationBehavior
   constructor: (@cells, @pageFlipInterval) ->
@@ -24,34 +24,34 @@ class MovementBehavior
 
 # Still - Down
 stillDownCells = [
-  new Cell 0,   0, 25, 50
-  new Cell 27,  0, 25, 50
-  new Cell 55,  0, 25, 50
-  new Cell 84,  0, 25, 50
-  new Cell 111, 0, 25, 50
-  new Cell 139, 0, 25, 50]
+  new Cell 0,   0
+  new Cell 27,  0
+  new Cell 55,  0
+  new Cell 84,  0
+  new Cell 111, 0
+  new Cell 139, 0]
 animateStillDown = new AnimationBehavior stillDownCells,
 1000 / stillDownCells.length
 
 # Still - Up
 stillUpCells = [
-  new Cell 1,   192, 25, 50
-  new Cell 29,  192, 25, 50
-  new Cell 56,  192, 25, 50
-  new Cell 83,  192, 25, 50
-  new Cell 111, 192, 25, 50
-  new Cell 138, 192, 25, 50]
+  new Cell 1,   192
+  new Cell 29,  192
+  new Cell 56,  192
+  new Cell 83,  192
+  new Cell 111, 192
+  new Cell 138, 192]
 animateStillUp = new AnimationBehavior stillUpCells,
 1000 / stillUpCells.length
 
 # Still - Left
 stillLeftCells = [
-  new Cell 0,   98, 25, 50
-  new Cell 26,  98, 25, 50
-  new Cell 53,  98, 25, 50
-  new Cell 79,  98, 25, 50
-  new Cell 105, 98, 25, 50
-  new Cell 132, 98, 25, 50]
+  new Cell 0,   98
+  new Cell 26,  98
+  new Cell 53,  98
+  new Cell 79,  98
+  new Cell 105, 98
+  new Cell 132, 98]
 animateStillLeft = new AnimationBehavior stillLeftCells,
 1000 / stillLeftCells.length
 
@@ -60,34 +60,34 @@ animateStillLeft = new AnimationBehavior stillLeftCells,
 
 # Move - Down
 moveDownCells = [
-  new Cell 184, 0, 25, 50
-  new Cell 210, 0, 25, 50
-  new Cell 237, 0, 25, 50
-  new Cell 263, 0, 25, 50
-  new Cell 289, 0, 25, 50
-  new Cell 316, 0, 25, 50]
+  new Cell 184, 0
+  new Cell 210, 0
+  new Cell 237, 0
+  new Cell 263, 0
+  new Cell 289, 0
+  new Cell 316, 0]
 animateMoveDown = new AnimationBehavior moveDownCells,
 1000 / moveDownCells.length
 
 # Move - Up
 moveUpCells = [
-  new Cell 184, 192, 25, 50
-  new Cell 210, 192, 25, 50
-  new Cell 237, 192, 25, 50
-  new Cell 262, 192, 25, 50
-  new Cell 287, 192, 25, 50
-  new Cell 314, 192, 25, 50]
+  new Cell 184, 192
+  new Cell 210, 192
+  new Cell 237, 192
+  new Cell 262, 192
+  new Cell 287, 192
+  new Cell 314, 192]
 animateMoveUp = new AnimationBehavior moveUpCells,
 1000 / moveUpCells.length
 
 # Move - Left
 moveLeftCells = [
-  new Cell 186, 96, 25, 50
-  new Cell 211, 96, 25, 50
-  new Cell 235, 96, 25, 50
-  new Cell 259, 96, 25, 50
-  new Cell 284, 96, 25, 50
-  new Cell 308, 96, 25, 50]
+  new Cell 186, 96
+  new Cell 211, 96
+  new Cell 235, 96
+  new Cell 259, 96
+  new Cell 284, 96
+  new Cell 308, 96]
 animateLeftDown = new AnimationBehavior moveLeftCells,
 1000 / moveUpCells.length
 

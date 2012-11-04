@@ -28,8 +28,9 @@ class SpriteSheetPainter
       @cellIndex++
   paint: (sprite, context) ->
     cell = @cells[@cellIndex]
-    context.drawImage sprite.sheet, cell.left, cell.top, cell.width,
-    cell.height, sprite.left, sprite.top, cell.width, cell.height
+    # Assumes cells are all the same width and height, set in sprite
+    context.drawImage sprite.sheet, cell.left, cell.top, sprite.width,
+    sprite.height, sprite.left, sprite.top, sprite.width, sprite.height
 
 window.Sprite = Sprite
 window.SpriteSheetPainter = SpriteSheetPainter
