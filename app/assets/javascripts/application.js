@@ -16,6 +16,7 @@
 //= require timer
 //= require cell
 //= require sprite
+//= require player
 //= require game
 //= require_tree .
 //= require websocket_rails/main

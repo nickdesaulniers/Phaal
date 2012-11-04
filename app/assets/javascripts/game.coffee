@@ -23,30 +23,14 @@ $(document).ready ->
     [2, 2, 0, 0, 0, 0, 0, 0, 0]
   ]
   board = new Board tileMap, context
-  # Dummy test code
-  runnerCells = [
-    new Cell(184, 0, 25, 50)
-    new Cell(210, 0, 25, 50)
-    new Cell(237, 0, 25, 50)
-    new Cell(263, 0, 25, 50)
-    new Cell(289, 0, 25, 50)
-  ]
-  runDown = new AnimationBehavior(runnerCells, 1000 / runnerCells.length)
-  moveDown = new MovementBehavior()
-
-  sprite = new Sprite 'runner',
-  new SpriteSheetPainter(runnerCells),
-  [runDown, moveDown]
   
   animate = (time) ->
     board.draw context
-    sprite.update context, time
-    sprite.paint context
+    player.update context, time
+    player.paint context
     requestAnimationFrame animate
   
   #init
-  sprite.left = canvas.width / 2 - sprite.width / 2
-  sprite.top = 100
-  sprite.sheet.src = 'assets/lock.png'
-  sprite.sheet.onload = ->
+  player = new Player 'id7', canvas.width / 2 - 25 / 2, 100
+  player.load 'assets/lock.png', ->
     requestAnimationFrame animate
