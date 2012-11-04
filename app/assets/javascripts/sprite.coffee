@@ -14,6 +14,9 @@ class Sprite
   update: (context, time) ->
     for i in [0...@behaviors.length]
       @behaviors[i].execute @, context, time
+  behave: (behaviors) ->
+    @behaviors = behaviors
+    @painter.cells = behaviors[0].cells if behaviors[0].cells
 
 class SpriteSheetPainter
   constructor: (@cells = []) ->

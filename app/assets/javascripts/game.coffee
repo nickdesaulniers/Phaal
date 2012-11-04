@@ -35,9 +35,9 @@ $(document).ready ->
   player.load 'assets/lock.png', ->
     requestAnimationFrame animate
 
-  #setTimeout ->
-  #  player.do downBehavior
-  #  setTimeout ->
-  #    player.reset()
-  #  , 2000
-  #, 3000
+  setTimeout ->
+    player.do downBehavior
+    setTimeout ->
+      player.reset()
+    , 2000
+  , 3000

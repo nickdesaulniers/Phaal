@@ -18,11 +18,8 @@ class Player
   paint: (context) ->
     @sprite.paint context
   reset: ->
-    @sprite.behaviors = stillBehavior
-    @sprite.painter.cells = stillBehavior[0].cells
+    @sprite.behave stillBehavior
   do: (behaviors) ->
-    if behaviors.length
-      @sprite.behaviors = behaviors
-      @sprite.painter.cells = behaviors[0].cells
+    @sprite.behave behaviors
 
 window.Player = Player
