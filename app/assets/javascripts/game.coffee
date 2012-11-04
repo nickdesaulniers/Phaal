@@ -49,5 +49,4 @@ $(document).ready ->
   sprite.top = 100
   sprite.sheet.src = 'assets/lock.png'
   sprite.sheet.onload = ->
-    lastAdvance = Date.now()
     requestAnimationFrame animate
