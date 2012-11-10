@@ -96,13 +96,11 @@ animateMoveLeft = new AnimationBehavior moveLeftCells,
 # Move - Right
 # move left but need to set sprite.translated = true, kinda sucks
 
-# All move behaviors share the same movement behavior
-move = new MovementBehavior()
-
 # Need to attach the new behaviors
-window.stillDownBehavior = [animateStillDown]
-window.stillUpBehavior = [animateStillUp]
-window.stillLeftBehavior = [animateStillLeft]
-window.moveDownBehavior = [animateMoveDown, move]
-window.moveUpBehavior = [animateMoveUp, move]
-window.moveLeftBehavior = [animateMoveLeft, move]
+window.stillDownBehavior = animateStillDown
+window.stillUpBehavior = animateStillUp
+window.stillLeftBehavior = animateStillLeft
+window.moveDownBehavior = animateMoveDown
+window.moveUpBehavior = animateMoveUp
+window.moveLeftBehavior = animateMoveLeft
+window.MovementBehavior = MovementBehavior

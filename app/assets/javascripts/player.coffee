@@ -1,7 +1,7 @@
 class Player
   constructor: (@id, left, top) ->
     #initialBehavior = moveDownBehavior
-    initialBehavior = stillDownBehavior
+    initialBehavior = [stillDownBehavior]
     initialCells = initialBehavior[0].cells
     
     @sprite = new Sprite 'Player',
@@ -18,16 +18,19 @@ class Player
   paint: (context) ->
     @sprite.paint context
   reset: ->
-    @sprite.behave stillDownBehavior
-  do: (behaviors) ->
-    @sprite.behave behaviors
+    @sprite.behave [stillDownBehavior]
+  do: (behaviors, move) ->
+    if move
+      @sprite.behave [behaviors, new MovementBehavior()]
+    else
+      @sprite.behave [behaviors]
   up: ->
     console.log 'up'
     @sprite.animating = true
     @sprite.translated = false
-    #@do stillUpBehavior
-    @sprite.velocityY *= -1
-    @do moveUpBehavior
+    @sprite.velocityY *= -1 if @sprite.velocityY > 0
+    console.log @sprite.velocityY
+    @do moveUpBehavior, true
     @sprite.animating = false
   down: (player) ->
     console.log 'down'
