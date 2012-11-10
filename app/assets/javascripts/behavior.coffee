@@ -56,7 +56,7 @@ animateStillLeft = new AnimationBehavior stillLeftCells,
 1000 / stillLeftCells.length
 
 # Still - Right
-# need to add mirroring logic!!!
+# still left but need to set sprite.translated = true, kinda sucks
 
 # Move - Down
 moveDownCells = [
@@ -92,7 +92,7 @@ animateLeftDown = new AnimationBehavior moveLeftCells,
 1000 / moveUpCells.length
 
 # Move - Right
-# need to add mirroring logic!!!
+# move left but need to set sprite.translated = true, kinda sucks
 
 # All move behaviors share the same movement behavior
 move = new MovementBehavior()

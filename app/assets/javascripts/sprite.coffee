@@ -8,6 +8,7 @@ class Sprite
     @velocityY = 50 # pixels / second
     @visible = true
     @animating = false
+    @translated = false
     @sheet = new Image()
   paint: (context) ->
     @painter.paint @, context if @painter?
@@ -28,9 +29,19 @@ class SpriteSheetPainter
       @cellIndex++
   paint: (sprite, context) ->
     cell = @cells[@cellIndex]
+    
+    # check if we need to flip image
+    if sprite.translated
+      context.save()
+      context.translate context.canvas.width, 0
+      context.scale -1, 1
+    
     # Assumes cells are all the same width and height, set in sprite
     context.drawImage sprite.sheet, cell.left, cell.top, sprite.width,
     sprite.height, sprite.left, sprite.top, sprite.width, sprite.height
+    
+    if sprite.translated
+      context.restore()
 
 window.Sprite = Sprite
 window.SpriteSheetPainter = SpriteSheetPainter
