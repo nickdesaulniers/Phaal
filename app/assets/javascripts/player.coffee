@@ -21,5 +21,31 @@ class Player
     @sprite.behave stillDownBehavior
   do: (behaviors) ->
     @sprite.behave behaviors
+  up: ->
+    console.log 'up'
+    @sprite.animating = true
+    @sprite.translated = false
+    #@do stillUpBehavior
+    @sprite.velocityY *= -1
+    @do moveUpBehavior
+    @sprite.animating = false
+  down: (player) ->
+    console.log 'down'
+    @sprite.animating = true
+    @sprite.translated = false
+    @do stillDownBehavior
+    @sprite.animating = false
+  left: (player) ->
+    console.log 'left'
+    @sprite.animating = true
+    @sprite.translated = false
+    @do stillLeftBehavior
+    @sprite.animating = false
+  right: (player) ->
+    console.log 'right'
+    @sprite.animating = true
+    @sprite.translated = true
+    @do stillLeftBehavior
+    @sprite.animating = false
 
 window.Player = Player

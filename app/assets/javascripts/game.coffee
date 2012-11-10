@@ -34,6 +34,8 @@ $(document).ready ->
   player = new Player 'id7', canvas.width / 2 - 25 / 2, 100
   player.load 'assets/lock.png', ->
     requestAnimationFrame animate
+  
+  initializeInputs player
 
   setTimeout ->
     player.do moveDownBehavior

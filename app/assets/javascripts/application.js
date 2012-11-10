@@ -17,6 +17,7 @@
 //= require behavior
 //= require sprite
 //= require player
+//= require input
 //= require game
 //= require_tree .
 //= require websocket_rails/main
