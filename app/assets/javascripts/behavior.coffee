@@ -88,7 +88,7 @@ moveLeftCells = [
   new Cell 259, 96
   new Cell 284, 96
   new Cell 308, 96]
-animateLeftDown = new AnimationBehavior moveLeftCells,
+animateMoveLeft = new AnimationBehavior moveLeftCells,
 1000 / moveUpCells.length
 
 # Move - Right
@@ -99,4 +99,8 @@ move = new MovementBehavior()
 
 # Need to attach the new behaviors
 window.stillDownBehavior = [animateStillDown]
+window.stillUpBehavior = [animateStillUp]
+window.stillLeftBehavior = [animateStillLeft]
 window.moveDownBehavior = [animateMoveDown, move]
+window.moveUpBehavior = [animateMoveUp, move]
+window.moveLeftBehavior = [animateMoveLeft, move]
