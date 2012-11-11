@@ -40,6 +40,6 @@ $(document).ready ->
   setTimeout ->
     player.down()
     setTimeout ->
-      player.reset()
+      player.stop()
     , 2000
   , 3000
