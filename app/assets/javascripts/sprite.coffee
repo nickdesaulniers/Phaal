@@ -37,7 +37,8 @@ class SpriteSheetPainter
       context.scale -1, 1
       context.drawImage sprite.sheet,
       cell.left, cell.top, sprite.width, sprite.height,
-      context.canvas.width - sprite.left - sprite.width, sprite.top, sprite.width, sprite.height
+      context.canvas.width - sprite.left - sprite.width, sprite.top,
+      sprite.width, sprite.height
       context.restore()
     else
       # Assumes cells are all the same width and height, set in sprite

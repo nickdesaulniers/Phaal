@@ -47,6 +47,6 @@ class Player
     @sprite.translated = true
     @sprite.velocityX = 50
     @sprite.velocityY = 0
-    @do stillLeftBehavior
+    @do moveLeftBehavior, true
 
 window.Player = Player

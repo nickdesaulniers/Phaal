@@ -21,6 +21,8 @@ class MovementBehavior
         sprite.top = 0
       if sprite.top < 0
         sprite.top = context.canvas.height - sprite.height
+      if sprite.left + sprite.width > context.canvas.width
+        sprite.left = 0
       if sprite.left < 0
         sprite.left = context.canvas.width - sprite.width
     @lastAdvance = time
