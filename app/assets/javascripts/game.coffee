@@ -29,17 +29,9 @@ $(document).ready ->
     player.update context, time
     player.paint context
     requestAnimationFrame animate
-  
-  #init
+
   player = new Player 'id7', canvas.width / 2 - 25 / 2, 100
   player.load 'assets/lock.png', ->
     requestAnimationFrame animate
   
   initializeInputs player
-
-  setTimeout ->
-    player.down()
-    setTimeout ->
-      player.stop()
-    , 2000
-  , 3000
