@@ -1,6 +1,5 @@
 class Player
   constructor: (@id, left, top) ->
-    #initialBehavior = moveDownBehavior
     initialBehavior = [stillDownBehavior]
     initialCells = initialBehavior[0].cells
     
@@ -26,28 +25,24 @@ class Player
     else
       @sprite.behave [behaviors]
   up: ->
-    console.log 'up'
     @sprite.translated = false
     @sprite.velocityX = 0
     @sprite.velocityY = -50
     @stopBehavior = [stillUpBehavior]
     @do moveUpBehavior, true
   down: (player) ->
-    console.log 'down'
     @sprite.translated = false
     @sprite.velocityX = 0
     @sprite.velocityY = 50
     @stopBehavior = [stillDownBehavior]
     @do moveDownBehavior, true
   left: (player) ->
-    console.log 'left'
     @sprite.translated = false
     @sprite.velocityX = -50
     @sprite.velocityY = 0
     @stopBehavior = [stillLeftBehavior]
     @do moveLeftBehavior, true
   right: (player) ->
-    console.log 'right'
     @sprite.translated = true
     @sprite.velocityX = 50
     @sprite.velocityY = 0

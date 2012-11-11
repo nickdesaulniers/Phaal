@@ -35,3 +35,6 @@ $(document).ready ->
     requestAnimationFrame animate
   
   initializeInputs player
+
+  comms = new Comms player
+  initializeChat comms

@@ -4,8 +4,8 @@ class Sprite
     @left = 0
     @width = 25
     @height = 50
-    @velocityX = 0
-    @velocityY = 50 # pixels / second
+    @velocityX = 0 # pixels / second
+    @velocityY = 0 # pixels / second
     @translated = false
     @sheet = new Image()
   paint: (context) ->

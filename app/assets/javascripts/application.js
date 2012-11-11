@@ -18,6 +18,8 @@
 //= require sprite
 //= require player
 //= require input
+//= require comm
+//= require chat
 //= require game
 //= require_tree .
 //= require websocket_rails/main
