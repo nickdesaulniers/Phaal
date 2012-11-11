@@ -27,20 +27,26 @@ class Player
   up: ->
     console.log 'up'
     @sprite.translated = false
+    @sprite.velocityX = 0
     @sprite.velocityY = -50
     @do moveUpBehavior, true
   down: (player) ->
     console.log 'down'
     @sprite.translated = false
+    @sprite.velocityX = 0
     @sprite.velocityY = 50
     @do moveDownBehavior, true
   left: (player) ->
     console.log 'left'
     @sprite.translated = false
-    @do stillLeftBehavior
+    @sprite.velocityX = -50
+    @sprite.velocityY = 0
+    @do moveLeftBehavior, true
   right: (player) ->
     console.log 'right'
     @sprite.translated = true
+    @sprite.velocityX = 50
+    @sprite.velocityY = 0
     @do stillLeftBehavior
 
 window.Player = Player

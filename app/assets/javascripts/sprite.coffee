@@ -30,18 +30,19 @@ class SpriteSheetPainter
   paint: (sprite, context) ->
     cell = @cells[@cellIndex]
     
-    # check if we need to flip image
+    # check if we need to flip image (special case for right movement)
     if sprite.translated
       context.save()
       context.translate context.canvas.width, 0
       context.scale -1, 1
-    
-    # Assumes cells are all the same width and height, set in sprite
-    context.drawImage sprite.sheet, cell.left, cell.top, sprite.width,
-    sprite.height, sprite.left, sprite.top, sprite.width, sprite.height
-    
-    if sprite.translated
+      #context.drawImage sprite.sheet, cell.left - sprite.width, cell.top,
+      #sprite.width, sprite.height, sprite.left, sprite.top, sprite.width,
+      #sprite.height
       context.restore()
+    else
+      # Assumes cells are all the same width and height, set in sprite
+      context.drawImage sprite.sheet, cell.left, cell.top, sprite.width,
+      sprite.height, sprite.left, sprite.top, sprite.width, sprite.height
 
 window.Sprite = Sprite
 window.SpriteSheetPainter = SpriteSheetPainter

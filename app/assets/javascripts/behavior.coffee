@@ -14,12 +14,15 @@ class MovementBehavior
   lastAdvance: 0 # BUG!!! need to reset lastAdvance between animations!
   execute: (sprite, context, time) ->
     if @lastAdvance isnt 0
-      sprite.top += sprite.velocityY * ((time - @lastAdvance) / 1000)
+      sprite.top  += sprite.velocityY * ((time - @lastAdvance) / 1000)
+      sprite.left += sprite.velocityX * ((time - @lastAdvance) / 1000)
       # move sprite to top if it reaches the bottom, don't keep this
       if sprite.top + sprite.height > context.canvas.height
         sprite.top = 0
       if sprite.top < 0
         sprite.top = context.canvas.height - sprite.height
+      if sprite.left < 0
+        sprite.left = context.canvas.width - sprite.width
     @lastAdvance = time
 
 # Behaviors (still or moving, direction)
