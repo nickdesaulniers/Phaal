@@ -35,9 +35,9 @@ class SpriteSheetPainter
       context.save()
       context.translate context.canvas.width, 0
       context.scale -1, 1
-      #context.drawImage sprite.sheet, cell.left - sprite.width, cell.top,
-      #sprite.width, sprite.height, sprite.left, sprite.top, sprite.width,
-      #sprite.height
+      context.drawImage sprite.sheet,
+      cell.left, cell.top, sprite.width, sprite.height,
+      context.canvas.width - sprite.left - sprite.width, sprite.top, sprite.width, sprite.height
       context.restore()
     else
       # Assumes cells are all the same width and height, set in sprite
