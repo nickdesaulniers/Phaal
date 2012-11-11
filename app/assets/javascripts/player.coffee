@@ -27,12 +27,13 @@ class Player
   up: ->
     console.log 'up'
     @sprite.translated = false
-    @sprite.velocityY *= -1 if @sprite.velocityY > 0
+    @sprite.velocityY = -50
     @do moveUpBehavior, true
   down: (player) ->
     console.log 'down'
     @sprite.translated = false
-    @do stillDownBehavior
+    @sprite.velocityY = 50
+    @do moveDownBehavior, true
   left: (player) ->
     console.log 'left'
     @sprite.translated = false

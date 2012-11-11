@@ -38,7 +38,7 @@ $(document).ready ->
   initializeInputs player
 
   setTimeout ->
-    player.do moveDownBehavior, true
+    player.down()
     setTimeout ->
       player.reset()
     , 2000
