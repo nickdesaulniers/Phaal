@@ -19,7 +19,6 @@ class Player
   paint: (context) ->
     @sprite.paint context
   stop: ->
-    @sprite.animating = false
     @sprite.behave @stopBehavior
   do: (behaviors, move) ->
     if move
@@ -28,7 +27,6 @@ class Player
       @sprite.behave [behaviors]
   up: ->
     console.log 'up'
-    @sprite.animating = true
     @sprite.translated = false
     @sprite.velocityX = 0
     @sprite.velocityY = -50
@@ -36,7 +34,6 @@ class Player
     @do moveUpBehavior, true
   down: (player) ->
     console.log 'down'
-    @sprite.animating = true
     @sprite.translated = false
     @sprite.velocityX = 0
     @sprite.velocityY = 50
@@ -44,7 +41,6 @@ class Player
     @do moveDownBehavior, true
   left: (player) ->
     console.log 'left'
-    @sprite.animating = true
     @sprite.translated = false
     @sprite.velocityX = -50
     @sprite.velocityY = 0
@@ -52,7 +48,6 @@ class Player
     @do moveLeftBehavior, true
   right: (player) ->
     console.log 'right'
-    @sprite.animating = true
     @sprite.translated = true
     @sprite.velocityX = 50
     @sprite.velocityY = 0

@@ -6,8 +6,6 @@ class Sprite
     @height = 50
     @velocityX = 0
     @velocityY = 50 # pixels / second
-    @visible = true
-    @animating = false
     @translated = false
     @sheet = new Image()
   paint: (context) ->
