@@ -23,6 +23,6 @@ class Comms
   sendClientChat: (msg) ->
     @dispatcher.trigger 'client_chat', msg
   moving: (direction) ->
-    @dispatcher.trigger 'movement', direction
+    @dispatcher.trigger 'movement_start', direction
 
 window.Comms = Comms

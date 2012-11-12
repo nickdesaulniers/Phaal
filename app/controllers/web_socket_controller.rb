@@ -24,12 +24,9 @@ class WebSocketController < WebsocketRails::BaseController
     send_message :starting_position, coords
   end
   # The built in client_disconnected event is buggy as hell for page refreshes
+  # https://github.com/DanKnox/websocket-rails/issues/24
   def client_disconnected
     puts "client #{current_user.email} disconnected"
-  end
-  def message_received
-    puts "Received message #{message} of type #{message.class} from user " +
-      current_user.email
   end
   def client_chat
     puts "Received message #{message} of type #{message.class} from user " +
@@ -41,7 +38,10 @@ class WebSocketController < WebsocketRails::BaseController
       }
     end
   end
-  def movement
+  def movement_start
     puts "#{current_user.email} started moving: #{message}"
+  end
+  def movement_end
+    puts "#{current_user.email} stopped moving: #{message}"
   end
 end
