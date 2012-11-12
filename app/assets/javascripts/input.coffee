@@ -4,7 +4,7 @@ initializeInputs = (player, comms) ->
   beginMoving = (direction) ->
     input_lock = true
     player[direction]()
-    comms.moving direction
+    comms.moving player, direction
   document.addEventListener 'keydown', (e) ->
     return if e.target is chatbar or input_lock
     
@@ -18,5 +18,6 @@ initializeInputs = (player, comms) ->
     return if e.target is chatbar or not input_lock
     input_lock = false
     player.stop()
+    comms.stopped player
 
 window.initializeInputs = initializeInputs

@@ -40,8 +40,19 @@ class WebSocketController < WebsocketRails::BaseController
   end
   def movement_start
     puts "#{current_user.email} started moving: #{message}"
+    return unless message['left'] && message['top'] && message['direction']
+    player = Player.find_by_user_id current_user
+    player.left = message['left']
+    player.top  = message['top']
+    player.last_direction = message['direction']
+    player.save
   end
   def movement_end
     puts "#{current_user.email} stopped moving: #{message}"
+    return unless message['left'] && message['top']
+    player = Player.find_by_user_id current_user
+    player.left = message['left']
+    player.top  = message['top']
+    player.save
   end
 end

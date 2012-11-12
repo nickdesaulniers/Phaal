@@ -10,5 +10,5 @@ WebsocketRails::EventMap.describe do
   sub :client_chat
   sub :starting_position
   sub :movement_start
-  sub :movement_stop
+  sub :movement_end
 end

@@ -22,7 +22,14 @@ class Comms
 
   sendClientChat: (msg) ->
     @dispatcher.trigger 'client_chat', msg
-  moving: (direction) ->
-    @dispatcher.trigger 'movement_start', direction
+  moving: (player, direction) ->
+    @dispatcher.trigger 'movement_start',
+      left: player.sprite.left,
+      top: player.sprite.top,
+      direction: direction
+  stopped: (player) ->
+    @dispatcher.trigger 'movement_end',
+      left: player.sprite.left,
+      top: player.sprite.top
 
 window.Comms = Comms
