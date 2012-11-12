@@ -34,5 +34,5 @@ $(document).ready ->
     player = new Player 'id7', coords[0], coords[1]
     player.load 'assets/lock.png', ->
       requestAnimationFrame animate
-    initializeInputs player
+    initializeInputs player, comms
   initializeChat comms

@@ -1,4 +1,4 @@
-initializeInputs = (player) ->
+initializeInputs = (player, comms) ->
   chatbar = document.getElementById 'chat_bar'
   input_lock = false
   document.addEventListener 'keydown', (e) ->
@@ -9,10 +9,10 @@ initializeInputs = (player) ->
     input_lock = true
     
     switch e.keyCode
-      when 87 then player.up()
-      when 65 then player.left()
-      when 83 then player.down()
-      when 68 then player.right()
+      when 87 then player.up(); comms.moving 'up'
+      when 65 then player.left(); comms.moving 'left'
+      when 83 then player.down(); comms.moving 'down'
+      when 68 then player.right(); comms.moving 'right'
   
   document.addEventListener 'keyup', (e) ->
     return if e.target is chatbar or not input_lock
