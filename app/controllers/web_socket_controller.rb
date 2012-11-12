@@ -15,10 +15,14 @@ class WebSocketController < WebsocketRails::BaseController
   # Array
   # ActiveSupport::HashWithIndifferentAccess
   def client_connected
-    puts 'client connected'
+    coords = [12, 200]
+    puts "client #{current_user.email} connected"
+    puts "sending coordinates #{coords}"
+    send_message :starting_position, coords
   end
+  # The built in client_disconnected event is buggy as hell for page refreshes
   def client_disconnected
-    puts 'client disconnected'
+    puts "client #{current_user.email} disconnected"
   end
   def message_received
     puts "Received message #{message} of type #{message.class} from user " +
@@ -33,5 +37,8 @@ class WebSocketController < WebsocketRails::BaseController
         user: current_user.email.sub(/@.+/, '')
       }
     end
+  end
+  def movement
+    puts "#{current_user.email} started moving: #{message}"
   end
 end
