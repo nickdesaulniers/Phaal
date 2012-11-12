@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904042100) do
+ActiveRecord::Schema.define(:version => 20121112182631) do
+
+  create_table "players", :force => true do |t|
+    t.integer  "user_id",                            :null => false
+    t.float    "top",            :default => 0.0,    :null => false
+    t.float    "left",           :default => 0.0,    :null => false
+    t.string   "last_direction", :default => "down", :null => false
+    t.boolean  "is_moving",      :default => false,  :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

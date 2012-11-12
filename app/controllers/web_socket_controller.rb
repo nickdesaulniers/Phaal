@@ -14,9 +14,12 @@ class WebSocketController < WebsocketRails::BaseController
   # FalseClass (false) or TrueClass (true)
   # Array
   # ActiveSupport::HashWithIndifferentAccess
+  
+  # When the client connects, give them their initial coordinates
   def client_connected
-    coords = [12, 200]
     puts "client #{current_user.email} connected"
+    player = current_user.player || current_user.create_player
+    coords = [player.left, player.top]
     puts "sending coordinates #{coords}"
     send_message :starting_position, coords
   end
