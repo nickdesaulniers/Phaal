@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require image_loader
 //= require timer
-//= require behavior
 //= require sprite
 //= require player
 //= require input
