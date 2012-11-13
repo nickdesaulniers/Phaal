@@ -15,7 +15,7 @@ class Comms
     @dispatcher.bind 'chatter', (msg) ->
       new ChatEvent msg
     @dispatcher.bind 'starting_position', (data) ->
-      if data.length is 2
+      if data.length is 3
         cb?(data)
       else
         throw new Error 'initial point back was wrong'
@@ -23,6 +23,8 @@ class Comms
       load_player = (id, player, player_list) ->
         p = new Player id, player.left, player.top
         p.load 'assets/lock.png', ->
+          p[player.last_direction]()
+          p.stop()
           player_list[id] = p
       for id, player of data
         load_player id, player, player_list

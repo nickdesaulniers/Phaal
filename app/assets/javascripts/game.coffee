@@ -33,9 +33,12 @@ $(document).ready ->
     requestAnimationFrame animate
 
   comms = new Comms player_list, (coords) ->
+    # coords = [left, top, direction]
     player = new Player 'id7', coords[0], coords[1]
     player.load 'assets/lock.png', ->
       player_list[-1] = player
+      player[coords[2]]()
+      player.stop()
       requestAnimationFrame animate
     initializeInputs player, comms
   initializeChat comms

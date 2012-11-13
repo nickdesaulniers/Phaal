@@ -19,7 +19,11 @@ class WebSocketController < WebsocketRails::BaseController
   def client_connected
     puts "client #{current_user.email} connected"
     current_player = current_user.player || current_user.create_player
-    coords = [current_player.left, current_player.top]
+    coords = [
+      current_player.left,
+      current_player.top,
+      current_player.last_direction
+    ]
     puts "sending coordinates #{coords}"
     send_message :starting_position, coords
     
@@ -52,8 +56,11 @@ class WebSocketController < WebsocketRails::BaseController
     end
   end
   def movement_start
-    puts "#{current_user.email} started moving: #{message}"
-    return unless message['left'] && message['top'] && message['direction']
+    #puts "#{current_user.email} started moving: #{message}"
+    return unless message['left'] && message['top'] && message['direction'] &&
+      message['direction'] == 'up'   || message['direction'] == 'down'      ||
+      message['direction'] == 'left' || message['direction'] == 'right'
+    puts "#{current_user.email} started moving #{message['direction']}"
     Player.find_by_user_id(current_user).update_attributes({
       left:           message['left'],
       top:            message['top'],
