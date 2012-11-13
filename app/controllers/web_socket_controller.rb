@@ -15,13 +15,26 @@ class WebSocketController < WebsocketRails::BaseController
   # Array
   # ActiveSupport::HashWithIndifferentAccess
   
-  # When the client connects, give them their initial coordinates
+  # When the client connects, give them their initial coordinates and player map
   def client_connected
     puts "client #{current_user.email} connected"
-    player = current_user.player || current_user.create_player
-    coords = [player.left, player.top]
+    current_player = current_user.player || current_user.create_player
+    coords = [current_player.left, current_player.top]
     puts "sending coordinates #{coords}"
     send_message :starting_position, coords
+    
+    # Get an array of the other players, convert to hash keyed on user id
+    players = Player.where 'user_id != ?', current_user
+    player_hash = {}
+    players.each do |player|
+      player_hash[player.user_id] = {
+        is_moving:      player.is_moving,
+        last_direction: player.last_direction,
+        left:           player.left,
+        top:            player.top
+      }
+    end
+    send_message :player_list, player_hash
   end
   # The built in client_disconnected event is buggy as hell for page refreshes
   # https://github.com/DanKnox/websocket-rails/issues/24

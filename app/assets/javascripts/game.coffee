@@ -23,16 +23,19 @@ $(document).ready ->
     [2, 2, 0, 0, 0, 0, 0, 0, 0]
   ]
   board = new Board tileMap, context
-  player = null
+  player_list = {}
   animate = (time) ->
     board.draw context
-    player.update context, time
-    player.paint context
+    for id, player of player_list
+      player.update context, time
+    for id, player of player_list
+      player.paint context
     requestAnimationFrame animate
 
-  comms = new Comms (coords) ->
+  comms = new Comms player_list, (coords) ->
     player = new Player 'id7', coords[0], coords[1]
     player.load 'assets/lock.png', ->
+      player_list[-1] = player
       requestAnimationFrame animate
     initializeInputs player, comms
   initializeChat comms

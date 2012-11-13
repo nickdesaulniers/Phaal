@@ -7,7 +7,7 @@ class ChatEvent
     document.dispatchEvent evt
 
 class Comms
-  constructor: (cb) ->
+  constructor: (player_list, cb) ->
     location = (window.location + 'websocket').replace /^http/, 'ws'
     @dispatcher = new WebSocketRails location
     
@@ -19,6 +19,14 @@ class Comms
         cb?(data)
       else
         throw new Error 'initial point back was wrong'
+    @dispatcher.bind 'player_list', (data) ->
+      load_player = (id, player, player_list) ->
+        p = new Player id, player.left, player.top
+        p.load 'assets/lock.png', ->
+          player_list[id] = p
+      for id, player of data
+        load_player id, player, player_list
+      null
 
   sendClientChat: (msg) ->
     @dispatcher.trigger 'client_chat', msg
