@@ -22,16 +22,17 @@ class WebSocketController < WebsocketRails::BaseController
     coords = [
       current_player.left,
       current_player.top,
+      current_player.id,
       current_player.last_direction
     ]
     puts "sending coordinates #{coords}"
     send_message :starting_position, coords
     
-    # Get an array of the other players, convert to hash keyed on user id
+    # Get an array of the other players, convert to hash keyed on player id
     players = Player.where 'user_id != ?', current_user
     player_hash = {}
     players.each do |player|
-      player_hash[player.user_id] = {
+      player_hash[player.id] = {
         is_moving:      player.is_moving,
         last_direction: player.last_direction,
         left:           player.left,
@@ -61,20 +62,26 @@ class WebSocketController < WebsocketRails::BaseController
       message['direction'] == 'up'   || message['direction'] == 'down'      ||
       message['direction'] == 'left' || message['direction'] == 'right'
     puts "#{current_user.email} started moving #{message['direction']}"
-    Player.find_by_user_id(current_user).update_attributes({
-      left:           message['left'],
-      top:            message['top'],
-      last_direction: message['direction'],
-      is_moving:      true
-    })
+    player = Player.find_by_user_id current_user
+    player.left           = message['left']
+    player.top            = message['top']
+    player.last_direction = message['direction']
+    player.is_moving      = true
+    player.save
+    broadcast_message :movement, {
+      id:             player.id,
+      last_direction: player.last_direction
+    }
   end
   def movement_end
     puts "#{current_user.email} stopped moving: #{message}"
     return unless message['left'] && message['top']
-    Player.find_by_user_id(current_user).update_attributes({
+    player = Player.find_by_user_id current_user
+    player.update_attributes({
       left:           message['left'],
       top:            message['top'],
       is_moving:      false
     })
+    broadcast_message :stoppage, {id: player.id}
   end
 end
