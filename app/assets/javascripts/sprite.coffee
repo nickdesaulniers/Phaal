@@ -1,12 +1,11 @@
 class Sprite
-  constructor: (@name, @painter, @behaviors = []) ->
+  constructor: (@user_name, @painter, @behaviors = []) ->
     @top = 0
     @left = 0
     @width = 25
     @height = 50
     @velocityX = 0 # pixels / second
     @velocityY = 0 # pixels / second
-    @translated = false
     @sheet = new Image()
   paint: (context) ->
     @painter.paint @, context if @painter?
@@ -42,6 +41,10 @@ class SpriteSheetPainter
       # Assumes cells are all the same width and height, set in sprite
       context.drawImage sprite.sheet, cell.left, cell.top, sprite.width,
       sprite.height, sprite.left, sprite.top, sprite.width, sprite.height
+    
+    # Draw username
+    context.strokeText sprite.user_name, sprite.left + 12, sprite.top - 10
+    context.fillText   sprite.user_name, sprite.left + 12, sprite.top - 10
 
 window.Sprite = Sprite
 window.SpriteSheetPainter = SpriteSheetPainter

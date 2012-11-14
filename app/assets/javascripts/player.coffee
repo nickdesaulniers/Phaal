@@ -100,11 +100,11 @@ animateMoveLeft = ->
 # move left but need to set sprite.translated = true, kinda sucks
   
 class Player
-  constructor: (@id, left, top) ->
+  constructor: (@user_name, left, top) ->
     initialBehavior = [animateStillDown()]
     initialCells = initialBehavior[0].cells
     
-    @sprite = new Sprite 'Player',
+    @sprite = new Sprite @user_name,
     new SpriteSheetPainter(initialCells),
     initialBehavior
     

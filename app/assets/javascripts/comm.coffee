@@ -9,7 +9,7 @@ class ChatEvent
 class Comms
   constructor: (player_list, cb) ->
     load_player = (id, player) ->
-      p = new Player id, player.left, player.top
+      p = new Player player.user_name, player.left, player.top
       p.load 'assets/lock.png', ->
         p[player.last_direction]()
         p.stop()

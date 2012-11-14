@@ -36,6 +36,7 @@ class WebSocketController < WebsocketRails::BaseController
     player_hash = {}
     players.each do |player|
       player_hash[player.id] = {
+        user_name:      player.user.email.sub(/@.+/, ''),
         is_moving:      player.is_moving,
         last_direction: player.last_direction,
         left:           player.left,
@@ -45,6 +46,7 @@ class WebSocketController < WebsocketRails::BaseController
     send_message :player_list, player_hash
     
     broadcast_message :player_enter, {
+      user_name:      current_user.email.sub(/@.+/, ''),
       id:             current_player.id,
       last_direction: current_player.last_direction,
       left:           current_player.left,
