@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/nickdesaulniers/websocket-rails.git
-  revision: 318b7fac3297641d63b50b31df67cd5609a43bd6
+  revision: 8b9d4a32b6801024bf0efc69c98a5459ae9a3c99
   specs:
     websocket-rails (0.1.8)
       faye-websocket
