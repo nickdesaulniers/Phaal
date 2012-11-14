@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112182631) do
+ActiveRecord::Schema.define(:version => 20121114142442) do
 
   create_table "players", :force => true do |t|
     t.integer  "user_id",                            :null => false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20121112182631) do
     t.boolean  "is_moving",      :default => false,  :null => false
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
+    t.boolean  "is_online",      :default => false,  :null => false
   end
 
   create_table "users", :force => true do |t|

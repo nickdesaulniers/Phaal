@@ -8,11 +8,17 @@ class ChatEvent
 
 class Comms
   constructor: (player_list, cb) ->
+    load_player = (id, player) ->
+      p = new Player id, player.left, player.top
+      p.load 'assets/lock.png', ->
+        p[player.last_direction]()
+        p.stop()
+        player_list[id] = p
     location = (window.location + 'websocket').replace /^http/, 'ws'
     @dispatcher = new WebSocketRails location
     @currentPlayerID = 0;
     
-    # On receiving a chat trigger a chat event
+    # Bind handlers to various events
     @dispatcher.bind 'chatter', (msg) ->
       new ChatEvent msg
     @dispatcher.bind 'starting_position', (data) =>
@@ -22,14 +28,8 @@ class Comms
       else
         throw new Error 'initial point back was wrong'
     @dispatcher.bind 'player_list', (data) ->
-      load_player = (id, player, player_list) ->
-        p = new Player id, player.left, player.top
-        p.load 'assets/lock.png', ->
-          p[player.last_direction]()
-          p.stop()
-          player_list[id] = p
       for id, player of data
-        load_player id, player, player_list
+        load_player id, player
       null
     @dispatcher.bind 'movement', (data) =>
       return if data.id is @currentPlayerID
@@ -37,6 +37,12 @@ class Comms
     @dispatcher.bind 'stoppage', (data) =>
       return if data.id is @currentPlayerID
       player_list[data.id].stop()
+    @dispatcher.bind 'player_enter', (data) =>
+      return if data.id is @currentPlayerID
+      load_player data.id, data
+    @dispatcher.bind 'player_exit', (data) =>
+      return if data.id is @currentPlayerID
+      delete player_list[data.id]
 
   sendClientChat: (msg) ->
     @dispatcher.trigger 'client_chat', msg

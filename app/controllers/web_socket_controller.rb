@@ -15,21 +15,24 @@ class WebSocketController < WebsocketRails::BaseController
   # Array
   # ActiveSupport::HashWithIndifferentAccess
   
-  # When the client connects, give them their initial coordinates and player map
+  # When the client connects:
+  # give them their initial coordinates, player list
+  # then broadcast that they connected
   def client_connected
     puts "client #{current_user.email} connected"
     current_player = current_user.player || current_user.create_player
+    current_player.is_online = true
+    current_player.save
     coords = [
       current_player.left,
       current_player.top,
       current_player.id,
       current_player.last_direction
     ]
-    puts "sending coordinates #{coords}"
     send_message :starting_position, coords
     
     # Get an array of the other players, convert to hash keyed on player id
-    players = Player.where 'user_id != ?', current_user
+    players = Player.where 'user_id != ? and is_online = ?', current_user, true
     player_hash = {}
     players.each do |player|
       player_hash[player.id] = {
@@ -40,6 +43,13 @@ class WebSocketController < WebsocketRails::BaseController
       }
     end
     send_message :player_list, player_hash
+    
+    broadcast_message :player_enter, {
+      id:             current_player.id,
+      last_direction: current_player.last_direction,
+      left:           current_player.left,
+      top:            current_player.top
+    }
   end
   # The built in client_disconnected event is buggy as hell for page refreshes
   # https://github.com/DanKnox/websocket-rails/issues/24
@@ -47,6 +57,12 @@ class WebSocketController < WebsocketRails::BaseController
   # https://github.com/DanKnox/websocket-rails/pull/25
   def client_disconnected
     puts "client #{current_user.email} disconnected"
+    current_player = current_user.player
+    broadcast_message :player_exit, {
+      id:   current_player.id
+    }
+    current_player.is_online = false
+    current_player.save
   end
   def client_chat
     puts "Received message #{message} of type #{message.class} from user " +
@@ -59,7 +75,6 @@ class WebSocketController < WebsocketRails::BaseController
     end
   end
   def movement_start
-    #puts "#{current_user.email} started moving: #{message}"
     return unless message['left'] && message['top'] && message['direction'] &&
       message['direction'] == 'up'   || message['direction'] == 'down'      ||
       message['direction'] == 'left' || message['direction'] == 'right'
