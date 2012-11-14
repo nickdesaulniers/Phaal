@@ -15,7 +15,7 @@ initializeInputs = (player, comms) ->
       when 68 then beginMoving 'right'
   
   document.addEventListener 'keyup', (e) ->
-    return if e.target is chatbar or not input_lock
+    return unless input_lock
     input_lock = false
     player.stop()
     comms.stopped player
