@@ -39,7 +39,7 @@ Optional, for running in production
 
 ## Running
 Run the server:
-`rails s` or `sudo rails s -p 80 -e production`
+`rails s` or `rvmsudo rails s -p 80 -e production`
 
 ## Playing
 Open the page:
