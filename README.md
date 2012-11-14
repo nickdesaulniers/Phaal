@@ -4,6 +4,9 @@
 
 ## Dependencies
 
+### Git
+http://git-scm.com/downloads
+
 ### Ruby
 Check your ruby version number with `ruby -v`, I'm using `ruby 1.9.3p269 (2012-09-09 revision 36939) [x86_64-darwin12.1.0]`
 
@@ -13,6 +16,9 @@ To install Ruby through rvm:
 rvm install 1.9.3-head
 ```
 make sure you add the `[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"` to your .bashrc or .zshrc, etc.
+
+### Download source code
+`git clone git://github.com/nickdesaulniers/Phaal.git && cd Phaal`
 
 ### Bundler
 I had a weird issue with a less than up to data version of bundler.
