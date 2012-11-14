@@ -43,8 +43,9 @@ class WebSocketController < WebsocketRails::BaseController
   end
   # The built in client_disconnected event is buggy as hell for page refreshes
   # https://github.com/DanKnox/websocket-rails/issues/24
+  # But I fixed it and contributed the patch upstream! Cool!
+  # https://github.com/DanKnox/websocket-rails/pull/25
   def client_disconnected
-    return if message.nil?
     puts "client #{current_user.email} disconnected"
   end
   def client_chat
